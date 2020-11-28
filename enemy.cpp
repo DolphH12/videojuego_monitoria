@@ -3,6 +3,9 @@
 #include <QGraphicsScene>
 #include <QDebug>
 #include <QList>
+#include <game.h>
+
+extern game * juego;
 
 Enemy::Enemy()
 {
@@ -24,6 +27,7 @@ void Enemy::move()
 {
     setPos(x(),y()+5);
     if(pos().y() + rect().height() > 600){
+        juego->health->decrease();
         scene()->removeItem(this);
         delete this;
     }
