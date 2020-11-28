@@ -13,7 +13,10 @@ Enemy::Enemy()
     setPos(random_number,0);
 
     //dibuja el enemigo
-    setRect(0,0,100,100);
+    setPixmap(QPixmap(":/images/Space Invaders Resources/BlueAlien.png"));
+    setScale(0.10);
+    setTransformOriginPoint(50,50);
+    setRotation(180);
 
     //connect
     QTimer * timer = new QTimer();
@@ -26,7 +29,7 @@ Enemy::Enemy()
 void Enemy::move()
 {
     setPos(x(),y()+5);
-    if(pos().y() + rect().height() > 600){
+    if(pos().y() > 600){
         juego->health->decrease();
         scene()->removeItem(this);
         delete this;

@@ -3,9 +3,13 @@
 #include <QGraphicsScene>
 #include "enemy.h"
 
-MyRect::MyRect()
+MyRect::MyRect(QGraphicsItem *parent)
 {
+    bsound = new QMediaPlayer();
+    bsound->setMedia(QUrl("qrc:/sounds/bala.mp3"));
 
+    setPixmap(QPixmap(":/images/Space Invaders Resources/RedCannon.png"));
+    setScale(0.15);
 }
 
 void MyRect::keyPressEvent(QKeyEvent *event)
@@ -23,6 +27,14 @@ void MyRect::keyPressEvent(QKeyEvent *event)
         Bullet * bullet = new Bullet();
         bullet->setPos(x(),y());
         scene()->addItem(bullet);
+
+        if(bsound->state() == QMediaPlayer::PlayingState){
+            bsound->setPosition(0);
+        }
+        else if(bsound->state() == QMediaPlayer::StoppedState){
+            bsound->play();
+        }
+
     }
 
 }

@@ -10,7 +10,8 @@ extern game * juego;
 Bullet::Bullet()
 {
     //dibuja la bala
-    setRect(50,0,10,50);
+    setPixmap(QPixmap(":/images/Space Invaders Resources/RedBullet.png"));
+    setScale(0.25);
 
     //connect
     QTimer * timer = new QTimer();
@@ -37,9 +38,8 @@ void Bullet::move()
 
 
     setPos(x(),y()-10);
-    if(pos().y() + rect().height() < 0){
+    if(pos().y() + 50 < 0){
         scene()->removeItem(this);
         delete this;
-        qDebug() << "Bala eliminada";
     }
 }
